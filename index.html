@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NeuroNote</title>
+    <!-- Tailwind with Typography plugin -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#fafafa', 100: '#f4f4f5', 200: '#e4e4e7', 300: '#d4d4d8', 400: '#a1a1aa',
+                500: '#71717a', 600: '#52525b', 700: '#3f3f46', 800: '#27272a', 900: '#18181b', 950: '#09090b',
+              },
+            },
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+              mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+              hand: ['Caveat', 'cursive'],
+            },
+          },
+        },
+      };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+      
+      /* FIX: Ensure bold and italic work regardless of Tailwind Preflight resets */
+      strong, b { font-weight: 700 !important; }
+      em, i { font-style: italic !important; }
+      
+      /* Markdown Preview Specific Fixes */
+      .markdown-preview strong, .prose strong { font-weight: 700 !important; color: inherit; }
+      .markdown-preview em, .prose em { font-style: italic !important; color: inherit; }
+      .markdown-preview h1, .prose h1 { font-size: 2.25em; font-weight: 800; margin-bottom: 0.5em; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.3em; }
+      .markdown-preview h2, .prose h2 { font-size: 1.875em; font-weight: 700; margin-bottom: 0.5em; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.3em; }
+      .markdown-preview h3, .prose h3 { font-size: 1.5em; font-weight: 600; margin-bottom: 0.5em; }
+      .markdown-preview ul, .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
+      .markdown-preview ol, .prose ol { list-style-type: decimal; padding-left: 1.5em; margin-bottom: 1em; }
+      .markdown-preview blockquote, .prose blockquote { border-left: 4px solid #e2e8f0; padding-left: 1em; color: #64748b; font-style: italic; margin-bottom: 1em; }
+      .markdown-preview code, .prose code { background-color: #f1f5f9; padding: 0.2em 0.4em; border-radius: 0.25em; font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+      .dark .markdown-preview code, .dark .prose code { background-color: #1e293b; color: #e2e8f0; }
+      .markdown-preview pre, .prose pre { background-color: #1e293b; color: #f8fafc; padding: 1em; border-radius: 0.5em; overflow-x: auto; margin-bottom: 1em; }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+      .dark ::-webkit-scrollbar-thumb { background: #475569; }
+      
+      .wiki-link { font-weight: 500; transition: all 0.2s; }
+
+      /* 3D Card Flip */
+      .perspective-1000 { perspective: 1000px; }
+      .preserve-3d { transform-style: preserve-3d; }
+      .backface-hidden { backface-visibility: hidden; }
+      .rotate-y-180 { transform: rotateY(180deg); }
+
+      /* Note Font Overrides */
+      .font-sans { font-family: 'Inter', sans-serif !important; }
+      .font-serif { font-family: 'Playfair Display', serif !important; }
+      .font-mono { font-family: 'JetBrains Mono', monospace !important; }
+      .font-hand { font-family: 'Caveat', cursive !important; }
+      
+      /* Ensure fonts apply to prose and editor */
+      .markdown-preview.font-sans *, .markdown-preview.font-sans { font-family: 'Inter', sans-serif !important; }
+      .markdown-preview.font-serif *, .markdown-preview.font-serif { font-family: 'Playfair Display', serif !important; }
+      .markdown-preview.font-mono *, .markdown-preview.font-mono { font-family: 'JetBrains Mono', monospace !important; }
+      .markdown-preview.font-hand *, .markdown-preview.font-hand { font-family: 'Caveat', cursive !important; }
+      
+      .markdown-preview.font-hand h1, .markdown-preview.font-hand h2, .markdown-preview.font-hand h3 { font-family: 'Caveat', cursive !important; }
+      
+      /* Hidden JIT Hints for Tailwind CDN */
+      .jit-hints { display: none; class: "font-sans font-serif font-mono font-hand"; }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "date-fns": "https://aistudiocdn.com/date-fns@^4.1.0",
+    "marked": "https://aistudiocdn.com/marked@^12.0.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#f4f4f5] text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 transition-colors duration-200 font-sans">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
